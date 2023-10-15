@@ -1,6 +1,7 @@
-import 'package:calculadora_imc_flutter/repository/pessoa_repository.dart';
+import 'package:calculadora_imc_flutter/repository/imc_repository.dart';
 import 'package:flutter/material.dart';
-import '../model/pessoa_model.dart';
+
+import '../model/Imc_model.dart';
 
 class ImcPage extends StatefulWidget {
   const ImcPage({Key? key}) : super(key: key);
@@ -11,13 +12,12 @@ class ImcPage extends StatefulWidget {
 }
 
 class _ImcPage extends State<ImcPage> {
-  PessoaRepository pessoaRepository = PessoaRepository();
-  var _pessoas = const <PessoaModel>[];
+  ImcRepository imcRepository = ImcRepository();
+  var _pessoas = const <ImcModel>[];
 
   final nomeController = TextEditingController(text: "");
   final alturaController = TextEditingController(text: "");
   final pesoController = TextEditingController(text: "");
-  // late List<PessoaModel> resultado = [];
 
 
   @override
@@ -27,7 +27,7 @@ class _ImcPage extends State<ImcPage> {
 
   }
   void obterPessoa() async {
-    _pessoas = await pessoaRepository.obterDados();
+    _pessoas = await imcRepository.obterDados();
     setState(() {});
   }
 
@@ -138,23 +138,23 @@ class _ImcPage extends State<ImcPage> {
                 child: _pessoas.isEmpty
                     ? const Padding(
                   padding: EdgeInsets.only(left: 12.0, right: 12),
-                  child: Text('Nenhum resultado para exibir, informe os dados e toque em Adicionar.'),
+                  child: Text('Calcule seu IMC'),
                 )
                     : ListView.builder(
                   itemCount: _pessoas.length,
                   itemBuilder: (BuildContext context, int index) {
-                    PessoaModel pessoa = _pessoas[index];
+                    ImcModel pessoa = _pessoas[index];
                     return ListTile(
                       dense: false,
                       isThreeLine: true,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 0,horizontal: 10),
                       title: Text(pessoa.nome, style: const TextStyle(color: Color.fromARGB(
                           255, 0, 0, 0)),),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('IMC: ${pessoa.imc.toStringAsFixed(2)}, Altura: ${pessoa.altura.toStringAsFixed(2)}, Peso: ${pessoa.peso.toStringAsFixed(2)}, Classificação: ${pessoa.classificacao}',
-                              style: const TextStyle(fontSize: 12)),
+                          Text('IMC: ${pessoa.imc.toStringAsFixed(2)}, Classificação: ${pessoa.classificacao}',
+                              style: const TextStyle(fontSize: 15)),
                         ],
                       ),
                     );
@@ -172,9 +172,9 @@ class _ImcPage extends State<ImcPage> {
       var peso = double.tryParse(pesoController.text)??0;
       if(peso != null && altura != null){
         var resultImc = peso/(altura*altura);
-        PessoaModel pessoa = new PessoaModel(0, nome, peso, altura, resultImc, getClassificacao(resultImc));
-        pessoaRepository.salvar(pessoa);
-        _pessoas = await pessoaRepository.obterDados();
+        ImcModel pessoa = new ImcModel(0, nome, peso, altura, resultImc, getClassificacao(resultImc));
+        imcRepository.salvar(pessoa);
+        _pessoas = await imcRepository.obterDados();
         print("AQUI: " + resultImc.toString());
       }else{
         print("Peso ou altura invalido!");

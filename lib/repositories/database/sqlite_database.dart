@@ -5,14 +5,14 @@ import 'package:path/path.dart' as path;
 
 Map<int, String>  scripts = {
   1: '''
-    CREATE TABLE pessoa (
+    CREATE TABLE tb_imc (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       peso REAL,
       nome TEXT,
       altura REAL,
       imc REAL,
       classificacao TEXT
-    );'''
+  )'''
 };
 
 

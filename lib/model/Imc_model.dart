@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PessoaModel{
+class ImcModel{
   String _nome = "";
   double _peso = 0;
   double _altura = 0;
@@ -9,7 +9,7 @@ class PessoaModel{
   String _classificacao = "";
 
 
-  PessoaModel(this._id, this._nome, this._peso, this._altura, this._imc, this._classificacao){}
+  ImcModel(this._id, this._nome, this._peso, this._altura, this._imc, this._classificacao){}
 
   String get nome => _nome;
 
