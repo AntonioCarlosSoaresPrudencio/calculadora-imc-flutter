@@ -1,13 +1,19 @@
-class Pessoa{
+import 'package:flutter/material.dart';
+
+class PessoaModel{
   String _nome = "";
   double _peso = 0;
   double _altura = 0;
   double _imc = 0;
+  int _id = 0;
+  String _classificacao = "";
 
 
-  Pessoa(this._nome, this._peso, this._altura, this._imc){}
+  PessoaModel(this._id, this._nome, this._peso, this._altura, this._imc, this._classificacao){}
 
   String get nome => _nome;
+
+  String get classificacao => _classificacao;
 
   double get peso => _peso;
 
@@ -15,8 +21,14 @@ class Pessoa{
 
   double get imc => _imc;
 
+  int get id => _id;
+
   set peso(double peso){
     _peso = peso;
+  }
+
+  set id(int id){
+    _id = id;
   }
 
   set altura(double altura){
@@ -25,6 +37,9 @@ class Pessoa{
 
   set nome(String nome){
     _nome = nome;
+  }
+  set classificacao(String classificacao){
+    _classificacao = classificacao;
   }
 
   set imc(double imc){
