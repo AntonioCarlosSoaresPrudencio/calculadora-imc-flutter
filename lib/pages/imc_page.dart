@@ -34,13 +34,11 @@ class _ImcPage extends State<ImcPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: const Text("Calculadora IMC"),
       ),
       body: Center(
-        // child: Text('Hello testeaaa'),
         child: Column(
           children: [
             Container(
